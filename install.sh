@@ -6,6 +6,6 @@ export GOPATH="$CURDIR"
 
 gofmt -w src
 go install top
-go build test
+go install test
 export GOPATH="$OLDGOPATH"
 echo 'ok!'
