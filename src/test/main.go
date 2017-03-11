@@ -1,10 +1,10 @@
 package main
 
 import (
+	"top"
 	// "github.com/chenbin/top"
 	"fmt"
 	"math/cmplx"
-	"top"
 )
 
 func add(x int, y int) int {
@@ -117,10 +117,10 @@ func main() {
 
 	fmt.Println("Rand Top Test...")
 	randData := data.New(10).Rand(10)
-	top, err := randData.Top(5)
+	topData, err := randData.Top(5)
 	fmt.Printf("\tData %v: %v\n\tTop %v: %v (err:%v)\n",
 		10, *randData,
-		5, top, err)
+		5, topData, err)
 
 	fmt.Println("TestCase...")
 	test := []int{9, 0, 1, 5, 2, 9, 2, 1, 2, 4}
