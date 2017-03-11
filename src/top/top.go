@@ -67,8 +67,7 @@ type TopData []int
 // New 新建
 func (d *TopData) New(n int) *TopData {
 	data := TopData(make([]int, n))
-	// fmt.Printf("%v %p\n", d, d)
-	if d != nil { //?
+	if d != nil { // var d TopData; d.New(3)   中的 d 并不是 nil ?
 		*d = data
 	}
 	return &data
@@ -77,7 +76,6 @@ func (d *TopData) New(n int) *TopData {
 // Rand 随机填充
 func (d *TopData) Rand(n int) *TopData {
 	rand.Seed(time.Now().Unix())
-	// rand.Read([]int(*d))
 	data := []int(*d)
 	for i := 0; i < len(data); i++ {
 		data[i] = rand.Intn(n)
@@ -154,7 +152,6 @@ func (d *TopData) Top(n int) ([]int, error) {
 	r := make([]int, n)
 	for i := 0; i < n; i++ {
 		winnerDataIndex := roundArray[roundArrayLength-1] - 1
-		// fmt.Println(winnerDataIndex, data[winnerDataIndex])
 		r[i] = data[winnerDataIndex]
 		// 已经找出的最大值不再参与计算（比较时一定为负）
 		data[winnerDataIndex] = 0
@@ -201,7 +198,7 @@ func (d *TopData) Top(n int) ([]int, error) {
 		// debugRoundArray(roundArray, maxRound)
 	}
 
-	fmt.Printf("\t共比较次: %v\n", compareCount)
+	fmt.Printf("\t共比较次数: %v\n", compareCount)
 	return r, nil
 }
 

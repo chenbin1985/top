@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/cmplx"
 	"top"
+	// "top1"
 )
 
 func add(x int, y int) int {
@@ -15,9 +16,9 @@ func swap(x, y int) (int, int) {
 }
 
 var (
-	ToBe   bool       = false
-	MaxInt uint64     = 1<<64 - 1
-	z      complex128 = cmplx.Sqrt(-5 + 12i)
+	toBe          = false
+	maxInt uint64 = 1<<64 - 1
+	z             = cmplx.Sqrt(-5 + 12i)
 )
 
 func main() {
@@ -32,8 +33,8 @@ func main() {
 	// println("add: 3 + 2 = ", add(3, 2), "swap: 2, 3 => ", x, y)
 
 	// const f string = "%T(%v)\n"
-	// fmt.Printf(f, ToBe, ToBe)
-	// fmt.Printf(f, MaxInt, MaxInt)
+	// fmt.Printf(f, toBe, toBe)
+	// fmt.Printf(f, maxInt, maxInt)
 	// fmt.Printf(f, z, z)
 
 	// var (
