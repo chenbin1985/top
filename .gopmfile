@@ -1,0 +1,5 @@
+[target]
+path=demo
+
+[deps]
+github.com/astaxie/beego=tag:v0.9.0
