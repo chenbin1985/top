@@ -61,16 +61,13 @@ func calcRoundArrayLength(nRound int) int {
 // 	return data[roundData[mapToRoundArrayIndex(round, maxRound, index)]]
 // }
 
-// TopData 可的slice
+// TopData 可取得前n个最大值的slice
 type TopData []int
 
 // New 新建
 func (d *TopData) New(n int) *TopData {
-	data := TopData(make([]int, n))
-	if d != nil { // var d TopData; d.New(3)   中的 d 并不是 nil ?
-		*d = data
-	}
-	return &data
+	*d = TopData(make([]int, n))
+	return d
 }
 
 // Rand 随机填充

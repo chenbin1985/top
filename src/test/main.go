@@ -81,22 +81,23 @@ func main() {
 	// kp := &rect{x: 1}
 	// println("x:", kp.x, "y:", kp.y)
 
-	// var arr [2]int
+	// arr := [...]int{2: 2, 3: 3}
+	// fmt.Printf("arr: %T %v -> %T %v\n", arr, arr, arr[2:3], arr[2:3])
 	// var slice = []int{1, 2, 3, 4, 5, 6}
 	// ms := make([]int, 2, 5)
-	// println("arr", arr[0], arr[1], len(arr), cap(arr))
-	// println("slice", slice[0], slice[1], len(slice), cap(slice))
+	// fmt.Println("arr", arr, len(arr), cap(arr))
+	// fmt.Println("slice", slice, len(slice), cap(slice))
 	// emptySlice := ms[1:1]
-	// println("emptySlice", len(emptySlice), cap(emptySlice))
+	// println("emptySlice", len(emptySlice), cap(emptySlice), emptySlice == nil)
 
 	// //ms[1] = 1
 	// // ms[4] = 4 // runtime error: index out of range
 	// println("make slice", ms[0], ms[1], len(ms), cap(ms))
 
 	// newS := slice[1:4]
-	// println("new slice", newS[0], newS[1], newS[2], len(newS), cap(newS))
+	// fmt.Println("new slice", newS, len(newS), cap(newS))
 
-	// ns := append(newS, 8)
+	// ns := append(newS, 8, 8, 8)
 	// for i, v := range ns {
 	// 	println(i, ":", v)
 	// }
@@ -111,9 +112,26 @@ func main() {
 	// 	fmt.Printf("now slice: %v\n", slice)
 	// }
 
+	// 结构体的零值
+	// type myStruct struct {
+	// 	x, y int
+	// }
+	// var s myStruct
+	// var p = new(myStruct)
+	// fmt.Printf("myStruct s: %v\n", s)              // myStruct s: {0 0}
+	// fmt.Printf("myStruct p: %v %v\n", p, p == nil) // myStruct p: &{0 0} false
+
+	// slice的零值
+	// var sliceInit top.TopData
+	// fmt.Printf("sliceInit: %v %v\n", sliceInit, sliceInit == nil) // sliceInit: [] true
+
 	fmt.Println("Seq Top Test...")
 	var data top.TopData
+	fmt.Printf("data: %v %v\n", data, data == nil) // data: [] true
+	// data = top.TopData([]int{1, 1, 1, 1})
+	// fmt.Printf("data: %v %v\n", data, data == nil)
 	data.New(10 - 0).Seq().ShowTop(5)
+	fmt.Printf("data changed: %v\n", data)
 	data.New(100000 - 0).Seq().ShowTop(100)
 
 	fmt.Println("Rand Top Test...")
