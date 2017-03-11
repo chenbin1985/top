@@ -5,7 +5,7 @@ OLDGOPATH="$GOPATH"
 export GOPATH="$CURDIR"
 
 gofmt -w src
-go install top
+rm -rf "$CURDIR"/pkg "$CURDIR"/bin
 go install test
 export GOPATH="$OLDGOPATH"
 echo 'ok!'

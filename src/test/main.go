@@ -1,10 +1,9 @@
 package main
 
 import (
-	"top"
-	// "github.com/chenbin/top"
 	"fmt"
 	"math/cmplx"
+	"top"
 )
 
 func add(x int, y int) int {
@@ -114,6 +113,7 @@ func main() {
 	fmt.Println("Seq Top Test...")
 	var data top.TopData
 	data.New(10 - 0).Seq().ShowTop(5)
+	data.New(100000 - 0).Seq().ShowTop(100)
 
 	fmt.Println("Rand Top Test...")
 	randData := data.New(10).Rand(10)
