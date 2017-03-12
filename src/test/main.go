@@ -132,6 +132,8 @@ func main() {
 	// fmt.Printf("data: %v %v\n", data, data == nil)
 	top.New(10 - 0).Seq().ShowTop(5)
 	top.New(100000 - 0).Seq().ShowTop(100)
+	top.New(100000 - 1).Seq().ShowTop(100)
+	top.New(100000 - 2).Seq().ShowTop(100)
 
 	fmt.Println("Rand Top Test...")
 	randData := top.New(10).Rand(10)
