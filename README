@@ -41,4 +41,5 @@ ok      _/Users/chenbin/Documents/codes/godemo/src/top  0.009s
 * 单元测试
 * 性能测试
 
-
+Todo:
+* 支持小数值: float64 math.Inf(-1) math.Max()
