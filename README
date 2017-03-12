@@ -1,4 +1,6 @@
 从大量数据中取得前n个最大的算法 （top模块）
+top - C风格算法
+topNew - Golang风格
 
 运行：
 ./install.sh && ./bin/test
@@ -31,5 +33,11 @@ Seq Top Test...
         共比较次数: 31
 PASS
 ok      _/Users/chenbin/Documents/codes/godemo/src/top  0.009s
+
+相关：
+* slice 函数闭包
+* 代码结构
+* GOPATH设置
+* 单元测试
 
 
