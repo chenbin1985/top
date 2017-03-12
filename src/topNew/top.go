@@ -8,6 +8,9 @@ import (
 	"time"
 )
 
+// MINVALUE 数据集中的最小值 (32位)
+const MINVALUE = -(1<<32 - 1)
+
 // 计算离n最近2的x次方值
 func near2Pow(n int, greater bool) int {
 	l := math.Log2(float64(n))
@@ -62,7 +65,7 @@ func getData(data []int, i int) int {
 		return data[i-1]
 	}
 
-	return 0
+	return MINVALUE
 }
 
 // TopData 可取得前n个最大值的slice
@@ -143,7 +146,7 @@ func (d *TopData) Top(n int) ([]int, error) {
 		winnerDataIndex := rounds[maxRound-1][0] - 1
 		top[i] = data[winnerDataIndex]
 		// 已经找出的最大值不再参与计算（比较时一定为负）
-		data[winnerDataIndex] = 0
+		data[winnerDataIndex] = MINVALUE
 		for r := 1; r < maxRound; r++ {
 			dataIndex := winnerDataIndex / int(math.Pow(2, float64(r-1)))
 			if dataIndex%2 != 0 {
