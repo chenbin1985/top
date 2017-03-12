@@ -145,4 +145,6 @@ func main() {
 	test := []int{9, 0, 1, 5, 2, 9, 2, 1, 2, 4}
 	fmt.Println(test)
 	(*top.TopData)(&test).ShowTop(4)
+
+	fmt.Println("更多的测试案例见 top_test.go")
 }

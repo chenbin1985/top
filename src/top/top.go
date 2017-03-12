@@ -8,6 +8,7 @@ import (
 	"time"
 )
 
+// copy
 func dupSlice(s []int) (d []int) {
 	d = make([]int, len(s), cap(s))
 	for i, v := range s {
@@ -15,6 +16,7 @@ func dupSlice(s []int) (d []int) {
 	}
 	return
 }
+
 func near2Pow(n int, greater bool) int {
 	l := math.Log2(float64(n))
 	i := math.Floor(l)
@@ -96,8 +98,10 @@ func (d *TopData) Top(n int) ([]int, error) {
 		return nil, errors.New("Top N is too big")
 	}
 
-	// data := *(*[]int)(d)
-	data := dupSlice([]int(*d)) // 拷贝一份防止修改
+	// 拷贝一份防止修改
+	data := make([]int, count)
+	copy(data, []int(*d))
+	//copy(data, *(*[]int)(d))
 
 	extN := near2Pow(count, true)
 	maxRound := int(math.Log2(float64(extN)))
