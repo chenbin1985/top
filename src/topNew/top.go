@@ -79,7 +79,7 @@ func (d *TopData) Rand(n int) *TopData {
 	rand.Seed(time.Now().Unix())
 	data := []int(*d)
 	for i := 0; i < len(data); i++ {
-		data[i] = rand.Intn(n)
+		data[i] = rand.Intn(n) + 1
 	}
 	return d
 }

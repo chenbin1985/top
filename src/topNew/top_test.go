@@ -26,3 +26,31 @@ func TestTop_Seq(t *testing.T) {
 		t.Errorf("Got %v, expected [2 2 2 2 2]. error: %v", top, err)
 	}
 }
+
+func BenchmarkTop(b *testing.B) {
+	fmt.Println("TopNew Benchmark Test...")
+	var data TopData
+	p := data.New(100000).Rand(100000)
+
+	for i := 0; i < b.N; i++ {
+		_, err := p.Top(100)
+		if err != nil {
+			b.Errorf("error: %v", err)
+		}
+	}
+}
+
+func BenchmarkParallelTop(b *testing.B) {
+	fmt.Println("TopNew Parallel Benchmark Test...")
+	var data TopData
+	p := data.New(100000).Rand(100000)
+
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_, err := p.Top(100)
+			if err != nil {
+				b.Errorf("error: %v", err)
+			}
+		}
+	})
+}
