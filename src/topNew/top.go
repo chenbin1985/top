@@ -69,9 +69,9 @@ func getData(data []int, i int) int {
 type TopData []int
 
 // New 新建
-func (d *TopData) New(n int) *TopData {
-	*d = TopData(make([]int, n))
-	return d
+func New(n int) *TopData {
+	d := TopData(make([]int, n))
+	return &d
 }
 
 // Rand 随机填充

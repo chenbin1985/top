@@ -130,12 +130,11 @@ func main() {
 	fmt.Printf("data: %v %v\n", data, data == nil) // data: [] true
 	// data = top.TopData([]int{1, 1, 1, 1})
 	// fmt.Printf("data: %v %v\n", data, data == nil)
-	data.New(10 - 0).Seq().ShowTop(5)
-	fmt.Printf("data changed: %v\n", data)
-	data.New(100000 - 0).Seq().ShowTop(100)
+	top.New(10 - 0).Seq().ShowTop(5)
+	top.New(100000 - 0).Seq().ShowTop(100)
 
 	fmt.Println("Rand Top Test...")
-	randData := data.New(10).Rand(10)
+	randData := top.New(10).Rand(10)
 	topData, err := randData.Top(5)
 	fmt.Printf("\tData %v: %v\n\tTop %v: %v (err:%v)\n",
 		10, *randData,
@@ -146,5 +145,5 @@ func main() {
 	fmt.Println(test)
 	(*top.TopData)(&test).ShowTop(4)
 
-	fmt.Println("更多的测试案例见 top_test.go")
+	fmt.Print("\n更多的测试案例见 top_test.go\n\n")
 }
