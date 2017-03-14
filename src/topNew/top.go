@@ -11,33 +11,23 @@ import (
 // MINVALUE 数据集中的最小值 (32位)
 const MINVALUE = -(1<<32 - 1)
 
-// 计算离n最近2的x次方值
-func near2Pow(n int, greater bool) int {
-	l := math.Log2(float64(n))
-	i := math.Floor(l)
-	if l == i {
-		return n
+func calcRoundInfo(count int) (int, int) {
+	var maxRound, length int
+	for ; count >= 1; count /= 2 {
+		maxRound++
+		if count > 2 && count%2 != 0 {
+			// 补齐为偶数
+			count++
+		}
+		length += count
 	}
-	if greater {
-		return int(math.Pow(2, i+1))
-	}
-	return int(math.Pow(2, i))
-}
 
-func calcRoundArrayLength(nRound int) int {
-	var count int
-	for i := nRound - 1; i >= 0; i-- {
-		count += int(math.Pow(2, float64(i)))
-	}
-	return count
+	return length, maxRound
 }
 
 // 根据数据个数count, 生成数组化的计算树
 func createRounds(count int) [][]int {
-	extCount := near2Pow(count, true)
-	maxRound := int(math.Log2(float64(extCount))) + 1
-
-	roundArrayLength := calcRoundArrayLength(maxRound)
+	roundArrayLength, maxRound := calcRoundInfo(count)
 	roundArray := make([]int, roundArrayLength)
 	for i := 0; i < count; i++ {
 		roundArray[i] = i + 1
@@ -46,7 +36,7 @@ func createRounds(count int) [][]int {
 	var start int
 	for r := 0; r < maxRound; r++ {
 		matchCount := int(math.Ceil(float64(count) / math.Pow(2, float64(r))))
-		if matchCount%2 != 0 {
+		if matchCount > 2 && matchCount%2 != 0 {
 			// 补齐为偶数
 			matchCount++
 		}
