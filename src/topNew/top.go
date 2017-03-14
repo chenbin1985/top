@@ -32,17 +32,6 @@ func calcRoundArrayLength(nRound int) int {
 	return count
 }
 
-func calcRoundSlice(round, maxRound int, roundArray []int) []int {
-	var start, end int
-	for i := 0; i < round; i++ {
-		maxRound--
-		start += int(math.Pow(2, float64(maxRound)))
-	}
-	maxRound--
-	end = start + int(math.Pow(2, float64(maxRound)))
-	return roundArray[start:end:end]
-}
-
 // 根据数据个数count, 生成数组化的计算树
 func createRounds(count int) [][]int {
 	extCount := near2Pow(count, true)
@@ -54,8 +43,16 @@ func createRounds(count int) [][]int {
 		roundArray[i] = i + 1
 	}
 	rounds := make([][]int, maxRound)
+	var start int
 	for r := 0; r < maxRound; r++ {
-		rounds[r] = calcRoundSlice(r, maxRound, roundArray)
+		matchCount := int(math.Ceil(float64(count) / math.Pow(2, float64(r))))
+		if matchCount%2 != 0 {
+			// 补齐为偶数
+			matchCount++
+		}
+		end := start + matchCount
+		rounds[r] = roundArray[start:end:end]
+		start += matchCount
 	}
 	return rounds
 }
@@ -112,8 +109,8 @@ func (d *TopData) Top(n int) ([]int, error) {
 
 	// calcMaxDataIndex 计算第r轮的第i与第i+1项的大小，返回数据索引
 	calcMaxDataIndex := func(r, i int) int {
-		leftDataIndex := rounds[r-1][i]
-		rightDataIndex := rounds[r-1][i+1]
+		leftDataIndex := rounds[r][i]
+		rightDataIndex := rounds[r][i+1]
 		left := getData(data, leftDataIndex)
 		right := getData(data, rightDataIndex)
 
@@ -130,13 +127,9 @@ func (d *TopData) Top(n int) ([]int, error) {
 	var compareCount int
 	// 初始化计算树
 	for r := 1; r < maxRound; r++ {
-		matchCount := int(math.Ceil(float64(count) / math.Pow(2, float64(r-1))))
-		if matchCount%2 != 0 {
-			// 补齐为偶数
-			matchCount++
-		}
+		matchCount := len(rounds[r-1])
 		for i := 0; i < matchCount; i += 2 {
-			rounds[r][i/2] = calcMaxDataIndex(r, i)
+			rounds[r][i/2] = calcMaxDataIndex(r-1, i)
 			compareCount++
 		}
 	}
@@ -153,7 +146,7 @@ func (d *TopData) Top(n int) ([]int, error) {
 				// 确保 dataIndex 为偶数
 				dataIndex = dataIndex - 1
 			}
-			rounds[r][dataIndex/2] = calcMaxDataIndex(r, dataIndex)
+			rounds[r][dataIndex/2] = calcMaxDataIndex(r-1, dataIndex)
 			compareCount++
 		}
 	}
