@@ -6,10 +6,20 @@ import (
 	"math"
 	"math/rand"
 	"time"
+	"unsafe"
 )
 
+var _i int
+
+const INTSIZE = uint(unsafe.Sizeof(_i) * 8)
+const MINVALUE = -(1<<(INTSIZE-1) - 1)
+
+func init() {
+	fmt.Printf("%v %T %v %T\n", INTSIZE, INTSIZE, MINVALUE, MINVALUE)
+}
+
 // MINVALUE 数据集中的最小值 (32位)
-const MINVALUE = -(1<<32 - 1)
+// const MINVALUE = -(1<<((32-1) - 1))
 
 func calcRoundInfo(count int) (int, int) {
 	var maxRound, length int
